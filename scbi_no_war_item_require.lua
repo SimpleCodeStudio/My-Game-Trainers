@@ -8,9 +8,9 @@ if not getMelon then print("Lua code can't loaded: ", badMelon) return end
 local success, result = pcall(getMelon)
 if not success then print("Code can't worked: ", result) return end
 
+function valueNotFound() gg.alert("Searched value not found. Please ask this from developer. (SimpleCodeStudio)") return end
 function Refine(a) gg.refineNumber(a) end
 function Search(d,r) gg.clearResults(); gg.searchNumber(d, r); if gg.getResultsCount() == 0 then valueNotFound() end end
-function valueNotFound() gg.alert("Searched value not found. Please ask this from developer. (SimpleCodeStudio)") return end
 function Offset(of) local o={}; gr=gg.getResults("1"); o[1]={}; o[1].address=gr[1].address+of; o[1].flags=gg.TYPE_DWORD; gg.addListItems(o) end
 
 
