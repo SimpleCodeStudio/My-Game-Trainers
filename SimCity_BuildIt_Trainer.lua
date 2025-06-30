@@ -5,13 +5,15 @@ local mainText = {}
 local bit32 = false
 local melon = {}
 if gg.getTargetInfo().x64 then
-  mainText = "[BETA x64] ♡Free Edition♡"
+  mainText = "[BETA x64] ☆Premium Script☆"
+  UP_A = "1443403311087616001"
+  UP_C = "h A4 AA E0 F2 F6 03 00 AA 03 00 40 F9 14 04 40 F9 94 02 03 CB 82 FE 44 93 62 0A 02 9B 53 04 00 91 7F 02 04 EB A8 08 00 54 C0 0A 40 F9 22 55 95 D2 42 55 B5 F2 03 00 03 CB 42 55 D5 F2 60 FC 44 93"
   melon = gg.makeRequest("https://raw.githubusercontent.com/SimpleCodeStudio/My-Public-Values/refs/heads/main/scbi_x64_data.lua")
   else
   bit32 = true
   gg.alert("Currently 32 bit not supporting due to too many changes.")
   os.exit()
-  mainText = "[BETA x32] ♡Free Edition♡"
+  mainText = "[BETA x32] ☆Premium Script☆"
   melon = gg.makeRequest("https://raw.githubusercontent.com/SimpleCodeStudio/GG-SimCity-BuildIt-Trainer/refs/heads/main/32bit-Pointers%26Ofsets.lua")
 end
 if not melon or not melon.content then print("Data Can't get!") return end
@@ -43,14 +45,13 @@ local BLDZ = "|🏗| "
 local trGui = "|☑️| "
 local maGui = "|☑️| "
 local nWCsR = "|☑️| "
-local scriptV = "0.2.4_b"
+local scriptV = "0.2.5_b"
 local UpdatedGameVersion = httpData.UGV[1]
-local FreezeMenus = {"XP (Premium)", "SIMOLEON", "SIMCASH", "GOLDEN KEY (Premium)", "PLATINUM KEY (Premium)", "NEO SIMOLEON (Premium)", "BACK"}
+local FreezeMenus = {"XP", "SIMOLEON", "SIMCASH", "GOLDEN KEY", "PLATINUM KEY", "NEO SIMOLEON", "BACK"}
 local strts = 0
 
 --#Functions
 function valueNotFound() gg.alert("Searched value not found. Please ask this from developer. (SimpleCodeStudio)") return end
-function premiumFeature() a=gg.alert("This menu for premium script. If u want this contact with developer via Whatsapp or Discord (Link or phone number will copy)", "DISCORD", "WHATSAPP", "CANCEL") if a == 1 then gg.copyText("https://discord.gg/8SfqwUkE9g") gg.alert("Discord community link copied.") elseif a == 2 then gg.copyText("+90 552 818 60 82") gg.alert("Whatsapp number is copied.") end end
 function usedWarn() gg.alert("Hey! You already used this function. If you want disable, restart the game.") end
 function Subtext(x) gg.toast("\n"..x) end
 function Offset(of) local o={}; gr=gg.getResults("1"); o[1]={}; o[1].address=gr[1].address+of; o[1].flags=gg.TYPE_DWORD; gg.addListItems(o) end
@@ -58,8 +59,8 @@ function OffsetL(of) local o={}; gr=gg.getResults("1"); o[1]={}; o[1].address=gr
 function OffsetLd(of) local o={}; gr=gg.getResults("1"); o[1]={}; o[1].address=gr[1].address+of; o[1].flags=gg.TYPE_DWORD; gg.addListItems(o) end
 function Refine(a) gg.refineNumber(a) end
 function Search(d,r) gg.clearResults(); gg.searchNumber(d, r); if gg.getResultsCount() == 0 then valueNotFound() end end
-function makEup_a() gg.clearResults(); gg.clearList(); if httpData.up_dataType[2] == "2" then gg.searchNumber(httpData.UP_A[1], gg.TYPE_QWORD); else gg.searchNumber(httpData.UP_A[1], gg.TYPE_BYTE); end local n = tonumber(httpData.up_ff[2]) local of = {"-0x"..n} local o={}; o[1]={}; o[1].address=gg.getResults("1")[1].address+ of[1]; o[1].flags=gg.TYPE_DWORD; gg.addListItems(o); gg.clearResults(); gg.loadResults(gg.getListItems("1")) end
-function makEup_c() gg.clearResults(); gg.clearList(); if httpData.up_dataType[1] == "2" then gg.searchNumber(httpData.UP_C[1], gg.TYPE_QWORD); else gg.searchNumber(httpData.UP_C[1], gg.TYPE_BYTE); end local n = tonumber(httpData.up_ff[1]) local o={}; o[1]={}; o[1].address=gg.getResults("1")[1].address+ n; o[1].flags=gg.TYPE_DWORD; gg.addListItems(o); gg.clearResults(); gg.loadResults(gg.getListItems("1")) end
+function makEup_a() gg.clearResults(); gg.clearList(); gg.searchNumber(UP_A, gg.TYPE_QWORD); local o={}; o[1]={}; o[1].address=gg.getResults("1")[1].address+ -0x14; o[1].flags=gg.TYPE_DWORD; gg.addListItems(o); gg.clearResults(); gg.loadResults(gg.getListItems("1")) end
+function makEup_c() gg.clearResults(); gg.clearList(); gg.searchNumber(UP_C, gg.TYPE_BYTE); local o={}; o[1]={}; o[1].address=gg.getResults("1")[1].address+ -0x40; o[1].flags=gg.TYPE_DWORD; gg.addListItems(o); gg.clearResults(); gg.loadResults(gg.getListItems("1")) end
 function FindPointer_v1(r) x=gg.getResults("1")[1].address; gg.clearResults(); gg.searchNumber(x, r) if gg.getResultsCount() == 0 then valueNotFound() end return end
 function FindPointer_v14(r) x=gg.getResults("14")[14].address; gg.clearResults(); gg.searchNumber(x, r) if gg.getResultsCount() == 0 then valueNotFound() end return end
 function FindPointer_v15(r) x=gg.getResults("15")[15].address; gg.clearResults(); gg.searchNumber(x, r) if gg.getResultsCount() == 0 then valueNotFound() end return end
@@ -71,7 +72,7 @@ local function mainRealServer() end
 
 
 function warMenus()
-  wm = gg.choice({"No War Item Require", "Free Upgrade", "Only Upgrade with 40 value. (Premium)", "BACK"})
+  wm = gg.choice({"No War Item Require", "Free Upgrade", "Only Upgrade with 40 value.", "BACK"})
   if wm == nil then
     else
     if wm == 1 then
@@ -200,7 +201,99 @@ function warMenus()
       end
     end
     if wm == 3 then
-      premiumFeature() return
+      if WRC40 == "|☑️| " then
+        WRC40 = "|✅️| "
+        if bit32 == true then gg.alert("Warning 32 bit detected! This can be fail or success. Because this a beta function. Atleast i coded an error fixer function for help.") end
+        local wc40p1 = {}
+        local wc40p2 = {}
+        local wc40p3 = {}
+        gg.clearList()
+        gg.setRanges(gg.REGION_C_ALLOC)
+        makEup_a()
+        if bit32 == true then FindPointer_v1(gg.TYPE_DWORD) else FindPointer_v1(gg.TYPE_QWORD) end
+        gg.setRanges(gg.REGION_C_ALLOC | gg.REGION_OTHER)
+        if bit32 == true then FindPointer_v14(gg.TYPE_DWORD) else FindPointer_v15(gg.TYPE_QWORD) end
+        g32 = gg.getResults("2500")
+        for i, v in ipairs(g32) do
+          v.address = v.address + httpData.wrcOfsets[14]
+          if bit32 == true then v.flags = gg.TYPE_DWORD else v.flags = gg.TYPE_QWORD end
+        end
+        gg.addListItems(g32)
+        gg.clearResults()
+        g30 = gg.getListItems("2100")
+        gg.loadResults(g30)
+        Refine("101")
+        gg.clearList()
+        if bit32 == true then OffsetLd(httpData.wrcOfsets[15]) else OffsetL(httpData.wrcOfsets[15]) end
+        gg.sleep("200")
+        if gg.getListItems("1")[1].value == 0 then
+          Subtext("Error found. Fixing...")
+          gg.clearList()
+          gg.getResults("1")
+          if bit32 == true then gg.editAll("38",gg.TYPE_DWORD) else gg.editAll("38",gg.TYPE_QWORD) end
+          Refine("101")
+        end
+        if bit32 == true then OffsetLd(httpData.wrcOfsets[15]) else OffsetL(httpData.wrcOfsets[15]) end
+        gg.sleep("200")
+        wc40p1 = gg.getListItems("1")[1].value
+        gg.sleep("100")
+        gg.clearList()
+        if bit32 == true then OffsetLd(httpData.wrcOfsets[16]) else OffsetL(httpData.wrcOfsets[16]) end
+        gg.sleep("200")
+        wc40p2 = gg.getListItems("1")[1].value
+        gg.sleep("100")
+        gg.clearList()
+        if bit32 == true then OffsetLd(httpData.wrcOfsets[17]) else OffsetL(httpData.wrcOfsets[17]) end
+        gg.sleep("200")
+        wc40p3 = gg.getListItems("1")[1].value
+        gg.sleep("100")
+        gg.clearList()
+        if warPt == true then
+          Search(warP,gg.TYPE_DWORD)
+          else
+          Search("53;4;19;49;38::76",gg.TYPE_DWORD)
+          gg.refineNumber("53")
+          Offset(httpData.wrcOfsets[1])
+          gg.sleep("100")
+          warP = gg.getListItems("1")[1].value
+          warPt = true
+          Search(warP,gg.TYPE_DWORD)
+        end
+        gg.sleep("100")
+        gg.clearList()
+        g9 = gg.getResults("30")
+        for i, v in ipairs(g9) do
+          v.address = v.address + httpData.wrcOfsets[5]
+          if bit32 == true then v.flags = gg.TYPE_DWORD else v.flags = gg.TYPE_QWORD end
+          v.value = wc40p1
+        end
+        gg.addListItems(g9)
+        gg.setValues(g9)
+        gg.sleep("100")
+        g10 = gg.getResults("30")
+        for i, v in ipairs(g10) do
+          v.address = v.address + httpData.wrcOfsets[6]
+          if bit32 == true then v.flags = gg.TYPE_DWORD else v.flags = gg.TYPE_QWORD end
+          v.value = wc40p2
+        end
+        gg.addListItems(g10)
+        gg.setValues(g10)
+        gg.sleep("100")
+        g11 = gg.getResults("30")
+        for i, v in ipairs(g11) do
+          v.address = v.address + httpData.wrcOfsets[7]
+          if bit32 == true then v.flags = gg.TYPE_DWORD else v.flags = gg.TYPE_QWORD end
+          v.value = wc40p3
+        end
+        gg.addListItems(g11)
+        gg.setValues(g11)
+        gg.clearResults()
+        gg.clearList()
+        Subtext("Successfuly")
+        else
+        usedWarn()
+        return
+      end
     end
     if wm == 4 then
       warMenu = false
@@ -210,14 +303,13 @@ function warMenus()
 end
 
 function freezeMenu()
-  -- This part very old and so mixed. For this reason i didnt care here. This working right? Lol
   fm = gg.multiChoice(FreezeMenus)
   
   if fm == nil then
     else
     local fvls = {}
     local fplc = {}
-    g11 = gg.getResults("8")
+    g11 = gg.getResults("24")
     function freezeRss()
       local o5 = {}
       o5[1] = {}
@@ -238,26 +330,23 @@ function freezeMenu()
       gg.addListItems(o5)
     end
     if fm[1] == true then
-      premiumFeature()
-    end
-    if fm[2] == true then
-      if FreezeMenus[2] == "SIMOLEON |✅️|" then
-        FreezeMenus[2] = "SIMOLEON"
-          fplc = 1
-          gg.sleep("100")
-          unFreezeRss()
-          fplc = 2
-          gg.sleep("100")
-          unFreezeRss()
-          fplc = 3
-          gg.sleep("100")
-          unFreezeRss()
-          fplc = 4
-          gg.sleep("100")
-          unFreezeRss()
-          gg.toast("\nSimoleon Unfreezed.")
-        else
-        FreezeMenus[2] = "SIMOLEON |✅️|"
+      if FreezeMenus[1] == "XP |✅️|" then
+        FreezeMenus[1] = "XP"
+        fplc = 1
+        gg.sleep("100")
+        unFreezeRss()
+        fplc = 2
+        gg.sleep("100")
+        unFreezeRss()
+        fplc = 3
+        gg.sleep("100")
+        unFreezeRss()
+        fplc = 4
+        gg.sleep("100")
+        unFreezeRss()
+        gg.toast("\nXP Unfreezed.")
+      else
+        FreezeMenus[1] = "XP |✅️|"
         fplc = 1
         fvls = g11[1].value
         gg.sleep("100")
@@ -274,12 +363,12 @@ function freezeMenu()
         fvls = g11[4].value
         gg.sleep("100")
         freezeRss()
-        gg.toast("\nSimoleon Freezed")
+        gg.toast("\nXP Freezed")
       end
     end
-    if fm[3] == true then
-      if FreezeMenus[3] == "SIMCASH |✅️|" then
-        FreezeMenus[3] = "SIMCASH"
+    if fm[2] == true then
+      if FreezeMenus[2] == "SIMOLEON |✅️|" then
+        FreezeMenus[2] = "SIMOLEON"
           fplc = 5
           gg.sleep("100")
           unFreezeRss()
@@ -292,9 +381,9 @@ function freezeMenu()
           fplc = 8
           gg.sleep("100")
           unFreezeRss()
-          gg.toast("\nSimcash Unfreezed.")
+          gg.toast("\nSimoleon Unfreezed.")
         else
-        FreezeMenus[3] = "SIMCASH |✅️|"
+        FreezeMenus[2] = "SIMOLEON |✅️|"
         fplc = 5
         fvls = g11[5].value
         gg.sleep("100")
@@ -311,24 +400,166 @@ function freezeMenu()
         fvls = g11[8].value
         gg.sleep("100")
         freezeRss()
+        gg.toast("\nSimoleon Freezed")
+      end
+    end
+    if fm[3] == true then
+      if FreezeMenus[3] == "SIMCASH |✅️|" then
+        FreezeMenus[3] = "SIMCASH"
+          fplc = 9
+          gg.sleep("100")
+          unFreezeRss()
+          fplc = 10
+          gg.sleep("100")
+          unFreezeRss()
+          fplc = 11
+          gg.sleep("100")
+          unFreezeRss()
+          fplc = 12
+          gg.sleep("100")
+          unFreezeRss()
+          gg.toast("\nSimcash Unfreezed.")
+        else
+        FreezeMenus[3] = "SIMCASH |✅️|"
+        fplc = 9
+        fvls = g11[9].value
+        gg.sleep("100")
+        freezeRss()
+        fplc = 10
+        fvls = g11[10].value
+        gg.sleep("100")
+        freezeRss()
+        fplc = 11
+        fvls = g11[11].value
+        gg.sleep("100")
+        freezeRss()
+        fplc = 12
+        fvls = g11[12].value
+        gg.sleep("100")
+        freezeRss()
         gg.toast("\nSimcash Freezed")
       end
     end
     if fm[4] == true then
-      premiumFeature()
+      if FreezeMenus[4] == "GOLDEN KEY |✅️|" then
+        FreezeMenus[4] = "GOLDEN KEY"
+          fplc = 13
+          gg.sleep("100")
+          unFreezeRss()
+          fplc = 14
+          gg.sleep("100")
+          unFreezeRss()
+          fplc = 15
+          gg.sleep("100")
+          unFreezeRss()
+          fplc = 16
+          gg.sleep("100")
+          unFreezeRss()
+          gg.toast("\nGolden Key Unfreezed.")
+        else
+        FreezeMenus[4] = "GOLDEN KEY |✅️|"
+        fplc = 13
+        fvls = g11[13].value
+        gg.sleep("100")
+        freezeRss()
+        fplc = 14
+        fvls = g11[14].value
+        gg.sleep("100")
+        freezeRss()
+        fplc = 15
+        fvls = g11[15].value
+        gg.sleep("100")
+        freezeRss()
+        fplc = 16
+        fvls = g11[16].value
+        gg.sleep("100")
+        freezeRss()
+        gg.toast("\nGolden Key Freezed")
+      end
     end
     if fm[5] == true then
-      premiumFeature()
+      if FreezeMenus[5] == "PLATINUM KEY |✅️|" then
+        FreezeMenus[5] = "PLATINUM KEY"
+          gg.sleep("100")
+          unFreezeRss()
+          fplc = 18
+          gg.sleep("100")
+          unFreezeRss()
+          fplc = 19
+          gg.sleep("100")
+          unFreezeRss()
+          fplc = 20
+          gg.sleep("100")
+          unFreezeRss()
+          gg.toast("\nPlatinum Key Unfreezed.")
+        else
+        FreezeMenus[5] = "PLATINUM KEY |✅️|"
+        fplc = 17
+        fvls = g11[17].value
+        gg.sleep("100")
+        freezeRss()
+        fplc = 18
+        fvls = g11[18].value
+        gg.sleep("100")
+        freezeRss()
+        fplc = 19
+        fvls = g11[19].value
+        gg.sleep("100")
+        freezeRss()
+        fplc = 20
+        fvls = g11[20].value
+        gg.sleep("100")
+        freezeRss()
+        gg.toast("\nPlatinum Key Freezed")
+      end
     end
     if fm[6] == true then
-      premiumFeature()
+      if FreezeMenus[6] == "NEO SIMOLEON |✅️|" then
+        FreezeMenus[6] = "NEO SIMOLEON"
+          fplc = 21
+          gg.sleep("100")
+          unFreezeRss()
+          fplc = 22
+          gg.sleep("100")
+          unFreezeRss()
+          fplc = 23
+          gg.sleep("100")
+          unFreezeRss()
+          fplc = 24
+          gg.sleep("100")
+          unFreezeRss()
+          gg.toast("\nNeo Simoleon Unfreezed.")
+        else
+        FreezeMenus[6] = "NEO SIMOLEON |✅️|"
+        fplc = 21
+        fvls = g11[21].value
+        gg.sleep("100")
+        freezeRss()
+        fplc = 22
+        fvls = g11[22].value
+        gg.sleep("100")
+        freezeRss()
+        fplc = 23
+        fvls = g11[23].value
+        gg.sleep("100")
+        freezeRss()
+        fplc = 24
+        fvls = g11[24].value
+        gg.sleep("100")
+        freezeRss()
+        gg.toast("\nNeo Simoleon Freezed")
+      end
     end
     if fm[7] == true then
       gg.clearList()
       gg.clearResults()
       freezeMenu_A = false
+      FreezeMenus[1] = "XP"
       FreezeMenus[2] = "SIMOLEON"
       FreezeMenus[3] = "SIMCASH"
+      FreezeMenus[4] = "GOLDEN KEY"
+      FreezeMenus[5] = "PLATINUM KEY"
+      FreezeMenus[6] = "NEO SIMOLEON"
       Subtext("Freeze mode disabled.")
       return
     end
@@ -337,7 +568,7 @@ end
 
 --#Real Server Main Function
 function RealServer()
-  mrs = gg.choice({"Timer Reseter + No Building Item Require", XP.."XP For All Building Items (Premium)", k48G.."48K Simcash Generator (Not working)", BLDZ.."Buldoze + Store for all buildings. (Premium)", FRZ.."Freeze Currencys", "WAR CARDS MENU", "BACK", EXT.."EXIT"},nil,mainText)
+  mrs = gg.choice({"Timer Reseter + No Building Item Require", XP.."XP For All Building Items", k48G.."48K Simcash Generator", BLDZ.."Buldoze + Store for all buildings.", FRZ.."Freeze Currencys", "WAR CARDS MENU", "BACK", EXT.."EXIT"},nil,mainText)
   if mrs == 1 then
     if TR == "|☑️| " then
       TR = "|✅️| "
@@ -393,13 +624,68 @@ function RealServer()
     end
   end
   if mrs == 2 then
-    premiumFeature()
+    if bit32 == true then
+      gg.alert("Sorry. 32 bit devices not supporting this function.")
+      else
+      p1 = gg.prompt({"XP Amount for all items:"})
+      if p1 == nil then
+          Subtext("CANCEL")
+        else
+        Subtext("Please Wait...")
+        gg.setRanges(gg.REGION_C_ALLOC)
+        makEup_a()
+        FindPointer_v1(gg.TYPE_QWORD)
+        gg.setRanges(gg.REGION_C_ALLOC | gg.REGION_OTHER)
+        FindPointer_v18(gg.TYPE_QWORD)
+        g1 = gg.getResults("120")
+        for i, v in ipairs(g1) do
+          v.address = v.address + 0x1f8
+          v.flags = gg.TYPE_DWORD
+          v.value = p1[1]
+        end
+        gg.setVisible(false)
+        XP = "X"
+        gg.addListItems(g1)
+        gg.setValues(g1)
+        gg.clearResults()
+        g2 = gg.getListItems("120")
+        gg.loadResults(g2)
+        Subtext("Successfuly")
+        gg.alert("Simple Warning:\nIf you open GameGuardian, XP Amount function is will disable.")
+      end
+    end
   end
   if mrs == 3 then
     gg.alert("This feature disabled due to not working anymore")
   end
   if mrs == 4 then
-    premiumFeature()
+    if bit32 == true then
+        gg.alert("Sorry. 32 bit devices not supporting this function.")
+      else
+      if strts == 0 then
+        strts = 1
+        Subtext("Please Wait...")
+        gg.setRanges(gg.REGION_C_ALLOC)
+        makEup_a()
+        FindPointer_v1(gg.TYPE_QWORD)
+        gg.setRanges(gg.REGION_C_ALLOC | gg.REGION_OTHER)
+        FindPointer_v15(gg.TYPE_QWORD)
+        g846 = gg.getResults("2100")
+        for i, v in ipairs(g846) do
+          v.address = v.address + 0x330
+          v.flags = gg.TYPE_DWORD
+          v.value = 11300145
+        end
+        gg.sleep("200")
+        gg.addListItems(g846)
+        gg.setValues(g846)
+        gg.clearResults()
+        gg.clearList()
+        Subtext("Successfuly")
+        else
+          usedWarn()
+      end
+    end
   end
   if mrs == 5 then
     Subtext("Freeze mode loading...")
@@ -685,7 +971,7 @@ function MenuSelect()
   end
   if ms == 4 then
     local lineI = "\n------------------------------\n"
-    gg.alert("Script Info"..lineI.."Developer: ForSimpleHack (SimpleCodeStudio)"..lineI.."Script Version: "..scriptV..""..lineI.."SimCity Version: "..UpdatedGameVersion..""..lineI.."Thanks for using my script!")
+    gg.alert("Script Info"..lineI.."Developer: SimpleCodeStudio (ForSimpleHack)"..lineI.."Script Version: "..scriptV..""..lineI.."SimCity Version: "..UpdatedGameVersion..""..lineI.."Best Helpers♡ (Discord Names): Zulfilham, Nyakz"..lineI.."Thanks for using my premium script! You are so cool 🔥🔥🔥")
   end
 end
 mainMenuSelect = MenuSelect
