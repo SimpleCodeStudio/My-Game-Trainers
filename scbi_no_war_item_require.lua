@@ -13,7 +13,7 @@ function Refine(a) gg.refineNumber(a) end
 function Search(d,r) gg.clearResults(); gg.searchNumber(d, r); if gg.getResultsCount() == 0 then valueNotFound() end end
 function Offset(of) local o={}; gr=gg.getResults("1"); o[1]={}; o[1].address=gr[1].address+of; o[1].flags=gg.TYPE_DWORD; gg.addListItems(o) end
 
-
+gg.alert(httpData.UGV[1])
 gg.clearList()
 gg.setRanges(gg.REGION_C_ALLOC | gg.REGION_OTHER)
 Search("53;4;19;49;38::76",gg.TYPE_DWORD)
