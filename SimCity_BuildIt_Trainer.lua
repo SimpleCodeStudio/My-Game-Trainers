@@ -818,24 +818,10 @@ function CheatServer()
       gg.clearResults()
       gg.clearList()
       gg.setRanges(gg.REGION_C_ALLOC)
-      gg.searchNumber(UP_C,gg.TYPE_BYTE) --unstablePointer
-      gg.sleep("100")
-      if gg.getResultsCount() == 0 then
-      valueNotFound()
-      return
-      end
-      g23 = gg.getResults("1")
-      gg.addListItems(g23)
-      g7_1 = gg.getListItems("1")
-      gg.clearResults()
-      gg.searchNumber(g7_1[1].address,gg.TYPE_QWORD)
-      gg.clearList()
-      g7_2 = gg.getResults("1")
-      gg.addListItems(g7_2)
+      makEup_c()
+      if bit32 == true then FindPointer_v1(gg.TYPE_DWORD) else FindPointer_v1(gg.TYPE_QWORD) end
       gg.setRanges(gg.REGION_C_ALLOC | gg.REGION_OTHER)
-      gg.clearResults()
-      g24 = gg.getListItems("1")
-      gg.searchNumber(g24[1].address,gg.TYPE_QWORD)
+      if bit32 == true then FindPointer_v1(gg.TYPE_DWORD) else FindPointer_v1(gg.TYPE_QWORD) end
       gg.clearList()
       local lofs = {}
       g25 = gg.getResults("1")
