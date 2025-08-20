@@ -6,7 +6,6 @@ local bit32 = false
 local melon = {}
 if gg.getTargetInfo().x64 then
   mainText = "[BETA x64] ☆Premium Script☆"
-  UP_A = "1443411252482146305"
   UP_C = "h A4 AA E0 F2 F6 03 00 AA 03 00 40 F9 14 04 40 F9 94 02 03 CB 82 FE 44 93 62 0A 02 9B 53 04 00 91 7F 02 04 EB A8 08 00 54 C0 0A 40 F9 22 55 95 D2 42 55 B5 F2 03 00 03 CB 42 55 D5 F2 60 FC 44 93"
   melon = gg.makeRequest("https://raw.githubusercontent.com/SimpleCodeStudio/My-Public-Values/refs/heads/main/scbi_x64_data.lua")
   else
@@ -23,6 +22,7 @@ local getMelon, badMelon = load(melon.content, "RemoteScript", "t", httpData)
 if not getMelon then print("Lua code can't loaded: ", badMelon) return end
 local success, result = pcall(getMelon)
 if not success then print("Code can't worked: ", result) return end
+UP_A = httpData.UP_A[1]
 local zindex = 0
 local freezeMenu_A = false
 local warMenu = false
