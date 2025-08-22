@@ -672,7 +672,7 @@ function RealServer()
         FindPointer_v15(gg.TYPE_QWORD)
         g846 = gg.getResults("2100")
         for i, v in ipairs(g846) do
-          v.address = v.address + 0x330
+          v.address = v.address + 0x358
           v.flags = gg.TYPE_DWORD
           v.value = 11300145
         end
